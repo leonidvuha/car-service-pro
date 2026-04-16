@@ -1,36 +1,137 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🔧 Car Service — Auto Repair Shop Web Application
 
-## Getting Started
+A full-stack web application for a small auto repair / tire service business.  
+Built as a portfolio project demonstrating modern fullstack development skills.
 
-First, run the development server:
+---
+
+## 📋 About the Project
+
+**Car Service** is a production-ready web app for managing an auto repair shop.  
+It covers the full customer journey — from browsing services to booking appointments —  
+as well as an admin panel for managing bookings, services, and schedules.
+
+**UI language:** German 🇩🇪  
+**Target audience:** Small auto repair / tire service businesses in Germany
+
+---
+
+## ✨ Features
+
+### Customer Side
+- 🏠 Landing page with services overview, pricing, and testimonials
+- 📅 Online appointment booking (Termin buchen)
+- 👤 Customer account: view and manage personal bookings
+- 📞 Contact page with business information
+
+### Admin Panel
+- 📋 View, confirm, cancel, and complete appointments
+- 🛠️ Manage services and pricing
+- 🕐 Manage working hours and time slots
+- 📊 Basic statistics dashboard
+
+---
+
+## 🛠️ Tech Stack
+
+| Layer              | Technology                        |
+|--------------------|-----------------------------------|
+| Framework          | Next.js 16.2 (App Router)        |
+| Language           | TypeScript 5                      |
+| Styling            | Tailwind CSS 4                    |
+| Database           | PostgreSQL (Neon)                 |
+| ORM                | Prisma 7                          |
+| Authentication     | NextAuth.js v5                    |
+| Deployment         | Vercel                            |
+| Local Dev DB       | Docker                            |
+
+---
+
+## 🗺️ Pages & Routes
+
+| Route                   | Description (DE)              |
+|-------------------------|-------------------------------|
+| `/`                     | Startseite (Home)             |
+| `/services`             | Leistungen (Services)         |
+| `/booking`              | Termin buchen (Booking)       |
+| `/contact`              | Kontakt (Contact)             |
+| `/auth/login`           | Anmelden (Login)              |
+| `/auth/register`        | Registrieren (Register)       |
+| `/dashboard`            | Kundenkonto (Customer Area)   |
+| `/admin`                | Adminbereich (Admin Panel)    |
+| `/admin/appointments`   | Terminverwaltung              |
+| `/admin/services`       | Leistungsverwaltung           |
+| `/admin/schedule`       | Zeitplanverwaltung            |
+
+---
+
+## 🚀 Getting Started
+
+### Prerequisites
+
+- Node.js 20+
+- npm
+- Docker (for local PostgreSQL)
+
+### Installation
 
 ```bash
+# Clone the repository
+git clone https://github.com/YOUR_USERNAME/car-service.git
+cd car-service
+
+# Install dependencies
+npm install
+
+# Set up environment variables
+cp .env.example .env.local
+# Fill in your DATABASE_URL, NEXTAUTH_SECRET, etc.
+
+# Run database migrations
+npx prisma migrate dev
+
+# Start development server
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+---
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 🗄️ Database Schema (Overview)
 
-## Learn More
+```
+User          → id, name, email, phone, role (CUSTOMER | ADMIN)
+Service       → id, name, description, duration, price
+Appointment   → id, userId, serviceId, date, timeSlot, status, vehicleInfo
+WorkSchedule  → id, dayOfWeek, openTime, closeTime, isOpen
+Review        → id, userId, rating, comment, createdAt
+```
 
-To learn more about Next.js, take a look at the following resources:
+---
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 📦 Project Status
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- [x] Project initialization
+- [ ] Prisma schema + Docker setup
+- [ ] UI components (Header, Footer, Layout)
+- [ ] Landing page
+- [ ] Authentication (NextAuth.js)
+- [ ] Booking system
+- [ ] Customer dashboard
+- [ ] Admin panel
+- [ ] Deployment (Vercel + Neon)
 
-## Deploy on Vercel
+---
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## 👤 Author
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+**Leonid**  
+Fullstack Developer  
+Germany
+
+---
+
+## 📄 License
+
+MIT License
