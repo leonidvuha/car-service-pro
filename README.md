@@ -114,7 +114,7 @@ Review        → id, userId, rating, comment, createdAt
 
 - [x] Project initialization
 - [x] Prisma schema + Neon database setup
-- [ ] UI components (Header, Footer, Layout)
+- [x] UI components (Header, Footer, Layout)
 - [ ] Landing page
 - [ ] Authentication (NextAuth.js)
 - [ ] Booking system
