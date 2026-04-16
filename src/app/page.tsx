@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 
 // ─── Data ─────────────────────────────────────────────────────────────────────
 
@@ -101,38 +102,59 @@ export default function HomePage() {
   return (
     <>
       {/* ── 1. Hero ── */}
-      <section className="bg-slate-900 text-white py-24 px-4">
-        <div className="max-w-4xl mx-auto text-center">
-          <span className="inline-block bg-orange-500/20 text-orange-400 text-sm font-semibold px-4 py-1.5 rounded-full mb-6">
-            Ihr Kfz-Meisterbetrieb in Berlin
-          </span>
-          <h1 className="text-4xl sm:text-5xl font-bold leading-tight mb-6">
-            Schnell. Zuverlässig.{" "}
-            <span className="text-orange-400">Günstig.</span>
-          </h1>
-          <p className="text-slate-300 text-lg sm:text-xl max-w-2xl mx-auto mb-10 leading-relaxed">
-            Von Reifenwechsel bis TÜV-Vorbereitung — wir kümmern uns um Ihr
-            Fahrzeug. Jetzt einfach online Termin buchen.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link
-              href="/booking"
-              className="bg-orange-500 hover:bg-orange-600 text-white font-bold px-8 py-4 rounded-xl text-lg transition-colors"
-            >
-              Termin buchen →
-            </Link>
-            <Link
-              href="/services"
-              className="border border-slate-600 hover:border-slate-400 text-slate-300 hover:text-white font-semibold px-8 py-4 rounded-xl text-lg transition-colors"
-            >
-              Alle Leistungen
-            </Link>
-          </div>
-          {/* Trust bar */}
-          <div className="flex flex-wrap justify-center gap-6 mt-14 text-slate-400 text-sm">
-            <span>✅ Über 2.000 zufriedene Kunden</span>
-            <span>✅ 15 Jahre Erfahrung</span>
-            <span>✅ Kostenlose Diagnose</span>
+      <section className="relative text-white overflow-hidden min-h-[620px] flex items-center">
+        {/* Background image */}
+        <Image
+          src="/images/hero-bg.png"
+          alt="CarService Premium Autowerkstatt"
+          fill
+          className="object-cover object-center"
+          priority
+          quality={90}
+        />
+        {/* Dark gradient overlay — left heavy so text is readable */}
+        <div className="absolute inset-0 bg-gradient-to-r from-slate-900/95 via-slate-900/75 to-slate-900/30" />
+
+        {/* Content */}
+        <div className="relative z-10 w-full px-4 py-24">
+          <div className="max-w-4xl mx-auto text-center">
+            <span className="inline-block bg-orange-500/20 text-orange-400 text-sm font-semibold px-4 py-1.5 rounded-full mb-6 border border-orange-500/30">
+              Ihr Kfz-Meisterbetrieb in Berlin
+            </span>
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight mb-6 drop-shadow-lg">
+              Schnell. Zuverlässig.{" "}
+              <span className="text-orange-400">Günstig.</span>
+            </h1>
+            <p className="text-slate-200 text-lg sm:text-xl max-w-2xl mx-auto mb-10 leading-relaxed drop-shadow">
+              Von Reifenwechsel bis TÜV-Vorbereitung — wir kümmern uns um Ihr
+              Fahrzeug. Jetzt einfach online Termin buchen.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Link
+                href="/booking"
+                className="bg-orange-500 hover:bg-orange-600 text-white font-bold px-8 py-4 rounded-xl text-lg transition-colors shadow-lg shadow-orange-500/25"
+              >
+                Termin buchen →
+              </Link>
+              <Link
+                href="/services"
+                className="border border-white/30 hover:border-white/60 bg-white/10 hover:bg-white/20 backdrop-blur-sm text-white font-semibold px-8 py-4 rounded-xl text-lg transition-all"
+              >
+                Alle Leistungen
+              </Link>
+            </div>
+            {/* Trust bar */}
+            <div className="flex flex-wrap justify-center gap-6 mt-14 text-slate-300 text-sm">
+              <span className="flex items-center gap-1.5">
+                <span className="text-orange-400">✓</span> Über 2.000 zufriedene Kunden
+              </span>
+              <span className="flex items-center gap-1.5">
+                <span className="text-orange-400">✓</span> 15 Jahre Erfahrung
+              </span>
+              <span className="flex items-center gap-1.5">
+                <span className="text-orange-400">✓</span> Kostenlose Diagnose
+              </span>
+            </div>
           </div>
         </div>
       </section>
