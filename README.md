@@ -115,7 +115,7 @@ Review        → id, userId, rating, comment, createdAt
 - [x] Project initialization
 - [x] Prisma schema + Neon database setup
 - [x] UI components (Header, Footer, Layout)
-- [ ] Landing page
+- [x] Landing page
 - [ ] Authentication (NextAuth.js)
 - [ ] Booking system
 - [ ] Customer dashboard
@@ -124,11 +124,14 @@ Review        → id, userId, rating, comment, createdAt
 
 ---
 
-## 👤 Author
+## 👥 Authors
 
-**Leonid**  
-Fullstack Developer  
-Germany
+**Leonid** — Fullstack Developer, Germany  
+**Claude (Anthropic)** — AI pair-programming partner
+
+> This project was built in collaboration with Claude AI.  
+> All architectural decisions, code reviews and implementations  
+> were done together as a pair-programming session.
 
 ---
 
