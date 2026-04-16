@@ -42,6 +42,3 @@ next-env.d.ts
 
 # prisma
 prisma/generated/
-
-# docker
-docker-compose.override.yml

@@ -43,7 +43,7 @@ as well as an admin panel for managing bookings, services, and schedules.
 | ORM                | Prisma 7                          |
 | Authentication     | NextAuth.js v5                    |
 | Deployment         | Vercel                            |
-| Local Dev DB       | Docker                            |
+| Database hosting   | Neon (dev + prod)                 |
 
 ---
 
@@ -71,7 +71,7 @@ as well as an admin panel for managing bookings, services, and schedules.
 
 - Node.js 20+
 - npm
-- Docker (for local PostgreSQL)
+- [Neon](https://neon.tech) account (free tier is enough)
 
 ### Installation
 
@@ -84,8 +84,8 @@ cd car-service
 npm install
 
 # Set up environment variables
-cp .env.example .env.local
-# Fill in your DATABASE_URL, NEXTAUTH_SECRET, etc.
+cp .env.example .env
+# Fill in your DATABASE_URL from Neon, NEXTAUTH_SECRET, etc.
 
 # Run database migrations
 npx prisma migrate dev
@@ -113,7 +113,7 @@ Review        → id, userId, rating, comment, createdAt
 ## 📦 Project Status
 
 - [x] Project initialization
-- [ ] Prisma schema + Docker setup
+- [x] Prisma schema + Neon database setup
 - [ ] UI components (Header, Footer, Layout)
 - [ ] Landing page
 - [ ] Authentication (NextAuth.js)

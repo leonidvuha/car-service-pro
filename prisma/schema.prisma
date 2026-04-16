@@ -1,0 +1,115 @@
+// Prisma 7 schema
+// - driverAdapters is built-in, no previewFeatures needed
+// - url is configured in prisma.config.ts (not here)
+// - Native driver (pg) is passed via adapter in lib/prisma.ts and prisma.config.ts
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  // url is intentionally absent — configured via adapter in prisma.config.ts
+}
+
+// ─── Enums ───────────────────────────────────────────────────────────────────
+
+enum Role {
+  CUSTOMER
+  ADMIN
+}
+
+enum AppointmentStatus {
+  PENDING    // waiting for admin confirmation
+  CONFIRMED  // confirmed by admin
+  CANCELLED  // cancelled by customer or admin
+  COMPLETED  // service done
+}
+
+enum DayOfWeek {
+  MONDAY
+  TUESDAY
+  WEDNESDAY
+  THURSDAY
+  FRIDAY
+  SATURDAY
+  SUNDAY
+}
+
+// ─── Models ──────────────────────────────────────────────────────────────────
+
+model User {
+  id           String   @id @default(cuid())
+  name         String
+  email        String   @unique
+  password     String?  // null for OAuth users
+  phone        String?
+  role         Role     @default(CUSTOMER)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  appointments Appointment[]
+  reviews      Review[]
+
+  @@map("users")
+}
+
+model Service {
+  id          String   @id @default(cuid())
+  name        String   // e.g. "Reifenwechsel", "Ölwechsel"
+  description String?
+  duration    Int      // duration in minutes
+  price       Float    // price in EUR
+  isActive    Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  appointments Appointment[]
+
+  @@map("services")
+}
+
+model Appointment {
+  id           String            @id @default(cuid())
+  userId       String
+  serviceId    String
+  date         DateTime          // date of the appointment
+  timeSlot     String            // e.g. "09:00", "10:30"
+  status       AppointmentStatus @default(PENDING)
+  vehicleMake  String?           // e.g. "BMW"
+  vehicleModel String?           // e.g. "320d"
+  licensePlate String?           // e.g. "B-AB 1234"
+  notes        String?           // customer notes
+  createdAt    DateTime          @default(now())
+  updatedAt    DateTime          @updatedAt
+
+  user    User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  service Service @relation(fields: [serviceId], references: [id])
+
+  @@map("appointments")
+}
+
+model WorkSchedule {
+  id        String    @id @default(cuid())
+  dayOfWeek DayOfWeek @unique
+  openTime  String    // e.g. "08:00"
+  closeTime String    // e.g. "18:00"
+  isOpen    Boolean   @default(true)
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+
+  @@map("work_schedules")
+}
+
+model Review {
+  id        String   @id @default(cuid())
+  userId    String
+  rating    Int      // 1-5
+  comment   String?
+  isVisible Boolean  @default(true)
+  createdAt DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("reviews")
+}
