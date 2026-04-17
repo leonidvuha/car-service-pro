@@ -3,8 +3,8 @@ import Image from "next/image";
 
 // ─── Data ─────────────────────────────────────────────────────────────────────
 
-// Featured services — displayed with photos
-const featuredServices = [
+// All services — displayed with photos
+const services = [
   {
     image: "/images/service-tires.png",
     title: "Reifenwechsel",
@@ -23,24 +23,20 @@ const featuredServices = [
     description: "Bremsbeläge, Bremsscheiben und Bremssättel prüfen und ersetzen.",
     price: "ab 89 €",
   },
-];
-
-// Additional services — displayed with icons
-const additionalServices = [
   {
-    icon: "🔍",
+    image: "/images/service-tuv.png",
     title: "TÜV-Vorbereitung",
     description: "Fahrzeuginspektion und Vorbereitung für die Hauptuntersuchung.",
     price: "ab 39 €",
   },
   {
-    icon: "⚡",
+    image: "/images/service-diagnostics.png",
     title: "Elektrik & Diagnose",
     description: "Fehlerauslese, Batteriecheck und elektrische Reparaturen.",
     price: "ab 35 €",
   },
   {
-    icon: "❄️",
+    image: "/images/service-ac.png",
     title: "Klimaanlage",
     description: "Klimaanlage befüllen, prüfen und desinfizieren.",
     price: "ab 69 €",
@@ -177,9 +173,9 @@ export default function HomePage() {
             </p>
           </div>
 
-          {/* Featured services with photos */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-6">
-            {featuredServices.map((service) => (
+          {/* Services grid — 6 cards with photos */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {services.map((service) => (
               <div
                 key={service.title}
                 className="rounded-2xl overflow-hidden border border-gray-100 hover:shadow-xl transition-all group"
@@ -203,27 +199,6 @@ export default function HomePage() {
                     {service.description}
                   </p>
                   <span className="inline-block bg-orange-50 text-orange-600 font-semibold text-sm px-3 py-1 rounded-full">
-                    {service.price}
-                  </span>
-                </div>
-              </div>
-            ))}
-          </div>
-
-          {/* Additional services with icons */}
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-            {additionalServices.map((service) => (
-              <div
-                key={service.title}
-                className="flex items-start gap-4 p-5 rounded-2xl border border-gray-100 hover:border-orange-200 hover:shadow-md transition-all"
-              >
-                <span className="text-3xl shrink-0">{service.icon}</span>
-                <div>
-                  <h3 className="font-bold text-slate-800 mb-1">{service.title}</h3>
-                  <p className="text-slate-500 text-sm leading-relaxed mb-2">
-                    {service.description}
-                  </p>
-                  <span className="text-orange-600 font-semibold text-sm">
                     {service.price}
                   </span>
                 </div>
