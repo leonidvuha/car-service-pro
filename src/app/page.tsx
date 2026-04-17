@@ -103,7 +103,7 @@ export default function HomePage() {
   return (
     <>
       {/* ── 1. Hero ── */}
-      <section className="relative text-white overflow-hidden min-h-[620px] flex items-center">
+      <section className="relative text-white overflow-hidden min-h-155 flex items-center">
         {/* Background image */}
         <Image
           src="/images/hero-bg.png"
@@ -115,7 +115,7 @@ export default function HomePage() {
           quality={90}
         />
         {/* Dark gradient overlay — left heavy so text is readable */}
-        <div className="absolute inset-0 bg-gradient-to-r from-slate-900/95 via-slate-900/75 to-slate-900/30" />
+        <div className="absolute inset-0 bg-linear-to-r from-slate-900/95 via-slate-900/75 to-slate-900/30" />
 
         {/* Content */}
         <div className="relative z-10 w-full px-4 py-24">
@@ -223,7 +223,7 @@ export default function HomePage() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
 
             {/* Photo — mechanic portrait */}
-            <div className="relative h-[480px] rounded-3xl overflow-hidden shadow-2xl">
+            <div className="relative h-120 rounded-3xl overflow-hidden shadow-2xl">
               <Image
                 src="/images/team-mechanic.png"
                 alt="Unser Kfz-Meister"
