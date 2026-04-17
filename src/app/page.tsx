@@ -3,25 +3,30 @@ import Image from "next/image";
 
 // ─── Data ─────────────────────────────────────────────────────────────────────
 
-const services = [
+// Featured services — displayed with photos
+const featuredServices = [
   {
-    icon: "🔄",
+    image: "/images/service-tires.png",
     title: "Reifenwechsel",
     description: "Sommer- und Winterreifen professionell montiert und ausgewuchtet.",
     price: "ab 49 €",
   },
   {
-    icon: "🛢️",
+    image: "/images/service-oil.png",
     title: "Ölwechsel",
     description: "Motoröl und Filter wechseln – schnell und mit Markenöl.",
     price: "ab 59 €",
   },
   {
-    icon: "🛑",
+    image: "/images/service-brakes.png",
     title: "Bremsenservice",
     description: "Bremsbeläge, Bremsscheiben und Bremssättel prüfen und ersetzen.",
     price: "ab 89 €",
   },
+];
+
+// Additional services — displayed with icons
+const additionalServices = [
   {
     icon: "🔍",
     title: "TÜV-Vorbereitung",
@@ -108,6 +113,7 @@ export default function HomePage() {
           src="/images/hero-bg.png"
           alt="CarService Premium Autowerkstatt"
           fill
+          sizes="100vw"
           className="object-cover object-center"
           priority
           quality={90}
@@ -170,25 +176,61 @@ export default function HomePage() {
               Alles rund ums Auto — aus einer Hand, mit Qualitätsgarantie.
             </p>
           </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {services.map((service) => (
+
+          {/* Featured services with photos */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-6">
+            {featuredServices.map((service) => (
               <div
                 key={service.title}
-                className="border border-gray-100 rounded-2xl p-6 hover:shadow-lg hover:border-orange-200 transition-all group"
+                className="rounded-2xl overflow-hidden border border-gray-100 hover:shadow-xl transition-all group"
               >
-                <div className="text-4xl mb-4">{service.icon}</div>
-                <h3 className="font-bold text-slate-800 text-lg mb-2">
-                  {service.title}
-                </h3>
-                <p className="text-slate-500 text-sm leading-relaxed mb-4">
-                  {service.description}
-                </p>
-                <span className="inline-block bg-orange-50 text-orange-600 font-semibold text-sm px-3 py-1 rounded-full">
-                  {service.price}
-                </span>
+                {/* Photo */}
+                <div className="relative h-52 overflow-hidden">
+                  <Image
+                    src={service.image}
+                    alt={service.title}
+                    fill
+                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                    className="object-cover group-hover:scale-105 transition-transform duration-500"
+                  />
+                </div>
+                {/* Content */}
+                <div className="p-5">
+                  <h3 className="font-bold text-slate-800 text-lg mb-1.5">
+                    {service.title}
+                  </h3>
+                  <p className="text-slate-500 text-sm leading-relaxed mb-3">
+                    {service.description}
+                  </p>
+                  <span className="inline-block bg-orange-50 text-orange-600 font-semibold text-sm px-3 py-1 rounded-full">
+                    {service.price}
+                  </span>
+                </div>
               </div>
             ))}
           </div>
+
+          {/* Additional services with icons */}
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+            {additionalServices.map((service) => (
+              <div
+                key={service.title}
+                className="flex items-start gap-4 p-5 rounded-2xl border border-gray-100 hover:border-orange-200 hover:shadow-md transition-all"
+              >
+                <span className="text-3xl shrink-0">{service.icon}</span>
+                <div>
+                  <h3 className="font-bold text-slate-800 mb-1">{service.title}</h3>
+                  <p className="text-slate-500 text-sm leading-relaxed mb-2">
+                    {service.description}
+                  </p>
+                  <span className="text-orange-600 font-semibold text-sm">
+                    {service.price}
+                  </span>
+                </div>
+              </div>
+            ))}
+          </div>
+
           <div className="text-center mt-10">
             <Link
               href="/services"
@@ -202,29 +244,60 @@ export default function HomePage() {
 
       {/* ── 3. Warum wir ── */}
       <section className="py-20 px-4 bg-slate-50">
-        <div className="max-w-5xl mx-auto">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-slate-800 mb-3">
-              Warum CarService?
-            </h2>
-            <p className="text-slate-500">
-              Das sind die Gründe, warum unsere Kunden immer wiederkommen.
-            </p>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {reasons.map((reason) => (
-              <div key={reason.title} className="text-center">
-                <div className="w-16 h-16 bg-orange-100 rounded-2xl flex items-center justify-center text-3xl mx-auto mb-4">
-                  {reason.icon}
-                </div>
-                <h3 className="font-bold text-slate-800 text-lg mb-2">
-                  {reason.title}
-                </h3>
-                <p className="text-slate-500 text-sm leading-relaxed">
-                  {reason.description}
-                </p>
+        <div className="max-w-6xl mx-auto">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+
+            {/* Photo — mechanic portrait */}
+            <div className="relative h-[480px] rounded-3xl overflow-hidden shadow-2xl">
+              <Image
+                src="/images/team-mechanic.png"
+                alt="Unser Kfz-Meister"
+                fill
+                sizes="(max-width: 1024px) 100vw, 50vw"
+                className="object-cover object-top"
+              />
+              {/* Badge overlay */}
+              <div className="absolute bottom-6 left-6 bg-white/95 backdrop-blur-sm rounded-2xl px-5 py-3 shadow-lg">
+                <p className="font-bold text-slate-800 text-lg">15+ Jahre Erfahrung</p>
+                <p className="text-slate-500 text-sm">Zertifizierter Kfz-Meister</p>
               </div>
-            ))}
+            </div>
+
+            {/* Reasons */}
+            <div>
+              <h2 className="text-3xl font-bold text-slate-800 mb-2">
+                Warum CarService?
+              </h2>
+              <p className="text-slate-500 mb-10">
+                Das sind die Gründe, warum unsere Kunden immer wiederkommen.
+              </p>
+              <div className="flex flex-col gap-7">
+                {reasons.map((reason) => (
+                  <div key={reason.title} className="flex items-start gap-5">
+                    <div className="w-14 h-14 bg-orange-100 rounded-2xl flex items-center justify-center text-2xl shrink-0">
+                      {reason.icon}
+                    </div>
+                    <div>
+                      <h3 className="font-bold text-slate-800 text-lg mb-1">
+                        {reason.title}
+                      </h3>
+                      <p className="text-slate-500 text-sm leading-relaxed">
+                        {reason.description}
+                      </p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+              <div className="mt-10">
+                <Link
+                  href="/booking"
+                  className="inline-block bg-orange-500 hover:bg-orange-600 text-white font-bold px-8 py-4 rounded-xl transition-colors"
+                >
+                  Jetzt Termin vereinbaren →
+                </Link>
+              </div>
+            </div>
+
           </div>
         </div>
       </section>
